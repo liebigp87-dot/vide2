@@ -146,7 +146,7 @@ SPECIALIZED_CATEGORIES = {
         'description': 'Serious events with significant emotional/psychological impact',
         'authenticity_signals': {
             'genuine': ['breaking news', 'live coverage', 'witness account', 'survivor story', 'documentary'],
-            'exploitative_warnings': ['clickbait', 'dramatic music', 'sensationalized', 'views only']
+            'staged_warnings': ['clickbait', 'dramatic music', 'sensationalized', 'views only', 'exploitative', 'shock value']
         },
         'content_types': {
             'natural_disasters': ['earthquake', 'hurricane', 'flood', 'wildfire', 'tsunami', 'tornado'],
