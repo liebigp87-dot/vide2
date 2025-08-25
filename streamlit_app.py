@@ -925,6 +925,50 @@ def main():
         **Key Factors:** Responsible Handling > Event Severity > Educational Value
         """)
 
+# Missing assessment functions
+def assess_inspirational_impact(all_text, comment_sentiment):
+    """Assess inspirational impact"""
+    score = 0.3
+    if comment_sentiment['total'] > 0:
+        positive_ratio = comment_sentiment['positive'] / comment_sentiment['total']
+        score += positive_ratio * 0.4
+    
+    motivational_words = ['motivated', 'inspired', 'pumped', 'ready']
+    matches = sum(1 for word in motivational_words if word in all_text['comments'])
+    score += min(matches * 0.1, 0.3)
+    
+    return min(score, 1.0)
+
+def assess_actionable_content(transcript_text, category_data):
+    """Assess actionable content"""
+    if not transcript_text:
+        return 0.5
+    
+    score = 0.4
+    actionable_phrases = ['how to', 'step', 'key is', 'important', 'advice']
+    matches = sum(1 for phrase in actionable_phrases if phrase in transcript_text)
+    score += min(matches * 0.1, 0.4)
+    
+    return min(score, 1.0)
+
+def assess_transformation_evidence(all_text, data):
+    """Assess transformation evidence"""
+    score = 0.4
+    
+    evidence_words = ['transformation', 'changed', 'different', 'journey', 'progress']
+    matches = sum(1 for word in evidence_words if word in all_text['title'] or word in all_text['description'])
+    score += min(matches * 0.2, 0.4)
+    
+    return min(score, 1.0)
+
+def assess_motivation_response(moments, comment_sentiment):
+    """Assess motivation response"""
+    score = 0.3
+    motivated_moments = [m for m in moments if 'motivated' in m['comment'].lower() or 'inspired' in m['comment'].lower()]
+    if len(motivated_moments) > 0:
+        score += 0.4
+    return min(score, 1.0)
+
 if __name__ == "__main__":
     main()import streamlit as st
 import requests
